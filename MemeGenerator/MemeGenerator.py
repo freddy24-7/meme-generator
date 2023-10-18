@@ -3,6 +3,7 @@
 import os
 import random
 from PIL import Image, ImageDraw, ImageFont
+from typing import Union
 
 
 class MemeGenerator:
@@ -41,7 +42,7 @@ class MemeGenerator:
         self._font_path = font
         os.makedirs(output_dir, exist_ok=True)
 
-    def make_meme(self, img_path: str, text: str, author: str, width=500) -> str | None:
+    def make_meme(self, img_path: str, text: str, author: str, width=500) -> Union[str, None]:
         """
         Generate a meme using an image and caption text.
 
