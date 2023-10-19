@@ -27,7 +27,7 @@ class MemeGenerator:
 
     """
 
-    DEFAULT_FONT_SIZE = 24
+    DEFAULT_FONT_SIZE = 14
 
     def __init__(self, output_dir: str, font: str):
         """
@@ -87,7 +87,7 @@ def _get_random_caption_position(img: Image.Image) -> tuple:
         tuple: A tuple containing the x and y coordinates for the caption's position.
 
     """
-    max_x = img.width - 150
+    max_x = img.width - 350
     max_y = img.height - 30
     text_x = random.randint(10, max_x)
     text_y = random.randint(10, max_y)

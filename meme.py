@@ -56,20 +56,20 @@ def get_random_quote(quote_files):
     return random.choice(quotes)
 
 
-def generate_meme(path=None, body=None, author=None):
+def generate_meme(options):
     """
-    Generate a meme given a path to an image, a quote body, and an author.
+    Generate a meme based on the specified options.
 
-    :param path: Path to an image file (optional).
-    :param body: Quote body to add to the image (optional).
-    :param author: Quote author to add to the image (optional).
+    :param options: A dictionary containing options for image, body, and author.
     :return: Path to the created meme image, or None if an error occurs.
     """
-    if path is None:
+    img = options.get('image', None)
+    body = options.get('body', None)
+    author = options.get('author', None)
+
+    if img is None:
         images_directory = "./_data/photos/dog/"
         img = get_random_image(images_directory)
-    else:
-        img = path[0]
 
     if body is None:
         quote_files = [
@@ -92,12 +92,18 @@ def generate_meme(path=None, body=None, author=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a meme.")
-    parser.add_argument("--path", type=str, help="Path to an image file")
+    parser.add_argument("--image", type=str, help="Path to an image file")
     parser.add_argument("--body", type=str, help="Quote body to add to the image")
     parser.add_argument("--author", type=str, help="Quote author to add to the image")
     args = parser.parse_args()
 
-    generated_path = generate_meme(args.path, args.body, args.author)
+    options = {
+        'image': args.image,
+        'body': args.body,
+        'author': args.author
+    }
+
+    generated_path = generate_meme(options)
 
     if generated_path:
         print(f"Meme generated and saved to: {generated_path}")
